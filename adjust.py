@@ -200,5 +200,7 @@ ax = fig.add_subplot(111, projection='3d')
 geo_adjusted = adjust(dat.geometry, dat.mw_normal_modes[0][:, mode + 6], displ)
 build_mol_figure(geo_adjusted)
 plt.show()
-
-write_xyz(geo_adjusted, dat.num_atoms, dat.elements, input(".xyz file name (don't add .xyz to name;\n leave blank to not save a .xyz file): "))
+output_name = input(".xyz file name (don't add .xyz to name;\n leave blank to not save a .xyz file): ")
+if output_name != "":
+    write_xyz(geo_adjusted, dat.num_atoms, dat.elements, output_name)
+    
