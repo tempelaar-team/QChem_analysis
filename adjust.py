@@ -188,16 +188,17 @@ element_colors = dict(
     Xe='orange'
 )
 
-dat = QC.ImportData(input("input file name"))
+dat = QC.ImportData(input("Input file name: "))
 dat.import_freq_data()
+
+mode = int(input("Mode to adjust: "))  # The mode which you want to displace along.
+displ = float(input("Displacement amount: ")) # amount that you want to displace.
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
-ax.view_init(90, 90, 0)  # top-down view
-mode = int(input("mode to adjust"))  # The mode which you want to displace along.
-displ = float(input("displacement amount")) # amount that you want to displace.
+# ax.view_init(90, 90, 0)  # top-down view
 geo_adjusted = adjust(dat.geometry, dat.mw_normal_modes[0][:, mode + 6], displ)
 build_mol_figure(geo_adjusted)
 plt.show()
 
-write_xyz(geo_adjusted, dat.num_atoms, dat.elements, input("XYZ file name"))
+write_xyz(geo_adjusted, dat.num_atoms, dat.elements, input(".xyz file name (don't add .xyz to name;\n leave blank to not save a .xyz file): "))

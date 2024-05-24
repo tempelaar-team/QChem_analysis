@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import QC_analysis as QC
 import threading
-
+import sys
 
 kToAU = 4.5563323e-06
 
@@ -222,8 +222,11 @@ def animate(i):
 if __name__ == "__main__":
     amplitude, vibModes, top_down = get_user_inputs()
 
+
+# Get the input file path from command-line arguments
+input_file = input("input file path: ")
     
-dat = QC.ImportData(['xef4.out'])
+dat = QC.ImportData([input_file])
 dat.import_freq_data()
 nAtoms = dat.num_atoms
 freqs = dat.mw_freq[0][6:]
